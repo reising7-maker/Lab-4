@@ -1,4 +1,4 @@
-/* 
+/*
 Levi Reising
 Computer Science
 
@@ -30,11 +30,11 @@ using namespace std;
 
 int main()
 {
-    
+
 
     ifstream infile;
     infile.open("C:/Users/reising7/Downloads/Computer Science/Lab 4/Temp.dat");
-    
+
     cout << "Must be in the range of -30 to 120 degrees" << endl;
     cout << "Each * represents 3 degrees (rounds up)" << endl;
 
@@ -76,17 +76,17 @@ int main()
                 cout << "|";
             }
 
-            
+
             //Displays how many stars should be added to temp (rounds up)
             while (temparature >= 1)
             {
                 cout << "*";
-                             
-                temparature = temparature - 3;              
+
+                temparature = temparature - 3;
                 //subtracting 3 each time rather than deviding by 3 then subtracting one so it will round up instead of down
             }
             cout << "" << endl;
-            
+
 
         }
         else if (temparature == 0)
@@ -118,7 +118,7 @@ int main()
 
             //Allows negaive numbers to aline with 0 marker using spaces
             spaces = 13 - stars;
-           
+
 
             while (spaces > 0)
             {
@@ -134,12 +134,8 @@ int main()
             }
             cout << "|" << endl;
         }
-        else 
-        {
-            //Doesn't show the temparature
-        }
 
-        
+
 
     }
 
