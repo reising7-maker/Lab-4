@@ -113,14 +113,14 @@ void positiveN(int temparature)
     cout << "" << endl;
 }
 
-void zeroN(int temparature)
+void zeroN(int temparature)//--------------------------------------------------------------------------------------------------------------------
 {
     cout << temparature;
     //Gives space to aline with 0
     cout << "                       |" << endl;
 }
 
-void negativeN(int temparature, int stars, int spaces)
+void negativeN(int temparature, int stars, int spaces)//-----------------------------------------------------------------------------------------
 {
     cout << temparature;
     cout << "        ";
