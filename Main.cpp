@@ -18,7 +18,17 @@ Negative temparatures will be on the left side of that 0 marker and positive on 
 The values for all temparatures should be between -30 to 120 degrees, all other temparatures will be discarted.
 */
 
+//Shows what the graph does and the top section of the graph
+void graph();
 
+//The stars that are displayed when the temparature is positive
+void positiveN(int temparature);
+
+//The stars that are displayed when the temparature is 0 (so none)
+void zeroN(int temparature);
+
+//The stars that are displayed when the temparature is negaive
+void negativeN(int temparature, int stars, int spaces);
 
 
 //Allows the use of cout and cin
@@ -30,11 +40,39 @@ using namespace std;
 
 int main()
 {
-
-
     ifstream infile;
     infile.open("C:/Users/reising7/Downloads/Computer Science/Lab 4/Temp.dat");
 
+    graph();
+
+    int temparature;
+    int stars = 0;
+    int spaces = 20;
+
+    //Reads out the temparatures in the file
+    while (infile >> temparature)
+    {
+        if (0 < temparature && temparature <= 120)
+            //Gived the needed stars for temparatures between 0 and 120
+        {
+            positiveN(temparature);
+        }
+        else if (temparature == 0)
+        {
+            zeroN(temparature);
+        }
+        else if (temparature < 0 && temparature >= -30)
+        {
+            negativeN(temparature, stars, spaces);
+        }
+
+    }
+
+    return 0;
+}
+
+void graph()//---------------------------------------------------------------------------------------------------------------------------
+{
     cout << "Must be in the range of -30 to 120 degrees" << endl;
     cout << "Each * represents 3 degrees (rounds up)" << endl;
 
@@ -42,103 +80,77 @@ int main()
     cout << "                Hourly Temparature" << endl;
     cout << "Temparature: -30  -15   0    15  30   45   60   75   90   105  120" << endl;
     cout << "--------------|----|----|----|----|----|----|----|----|----|----|---" << endl;
-    int temparature;
-    int stars;
-    int spaces;
+}
 
-    stars = 0;
-    //Spaces are 20 to give enough room for all the number indicators
-    spaces = 20;
+void positiveN(int temparature)
+{
+    //Has to be here so it doesn't display numbers out of range. Extra spaces make it look better
+    cout << temparature;
+    cout << "                     ";
 
-    //Reads out the temparatures in the file
-    while (infile >> temparature)
+    //Alines the 0 marker for different digits:
+    if (temparature < 10)
     {
-
-        if (0 < temparature && temparature <= 120)
-            //Gived the needed stars for temparatures between 0 and 120
-        {
-            //Has to be here so it doesn't display numbers out of range. Extra spaces make it look better
-            cout << temparature;
-            cout << "                     ";
-
-
-            //Alines the 0 marker for different digits:
-            if (temparature < 10)
-            {
-                cout << "  |";
-            }
-            else if (temparature < 100)
-            {
-                cout << " |";
-            }
-            else
-            {
-                cout << "|";
-            }
-
-
-            //Displays how many stars should be added to temp (rounds up)
-            while (temparature >= 1)
-            {
-                cout << "*";
-
-                temparature = temparature - 3;
-                //subtracting 3 each time rather than deviding by 3 then subtracting one so it will round up instead of down
-            }
-            cout << "" << endl;
-
-
-        }
-        else if (temparature == 0)
-        {
-            cout << temparature;
-            //Gives space to aline with 0
-            cout << "                       |" << endl;
-
-
-
-        }
-        else if (temparature < 0 && temparature >= -30)
-        {
-            cout << temparature;
-            cout << "        ";
-
-            //Gives one extra space for single digits to aline with double digits
-            if (temparature > -10)
-            {
-                cout << " ";
-            }
-
-            while (temparature <= -1)
-            {
-                temparature = temparature + 3;
-                //makes an indicator for how many stars will be needed so spaces can go before it
-                stars = stars + 1;
-            }
-
-            //Allows negaive numbers to aline with 0 marker using spaces
-            spaces = 13 - stars;
-
-
-            while (spaces > 0)
-            {
-                cout << " ";
-                spaces = spaces - 1;
-            }
-
-            //Puts stars after spaces
-            while (stars > 0)
-            {
-                cout << "*";
-                stars = stars - 1;
-            }
-            cout << "|" << endl;
-        }
-
-
-
+        cout << "  |";
+    }
+    else if (temparature < 100)
+    {
+        cout << " |";
+    }
+    else
+    {
+        cout << "|";
     }
 
+    //Displays how many stars should be added to temp (rounds up)
+    while (temparature >= 1)
+    {
+        cout << "*";
 
-    return 0;
+        temparature = temparature - 3;
+        //subtracting 3 each time rather than deviding by 3 then subtracting one so it will round up instead of down
+    }
+    cout << "" << endl;
+}
+
+void zeroN(int temparature)
+{
+    cout << temparature;
+    //Gives space to aline with 0
+    cout << "                       |" << endl;
+}
+
+void negativeN(int temparature, int stars, int spaces)
+{
+    cout << temparature;
+    cout << "        ";
+
+    //Gives one extra space for single digits to aline with double digits
+    if (temparature > -10)
+    {
+        cout << " ";
+    }
+
+    while (temparature <= -1)
+    {
+        temparature = temparature + 3;
+        //makes an indicator for how many stars will be needed so spaces can go before it
+        stars = stars + 1;
+    }
+
+    //Allows negaive numbers to aline with 0 marker using spaces
+    spaces = 13 - stars;
+    while (spaces > 0)
+    {
+        cout << " ";
+        spaces = spaces - 1;
+    }
+
+    //Puts stars after spaces
+    while (stars > 0)
+    {
+        cout << "*";
+        stars = stars - 1;
+    }
+    cout << "|" << endl;
 }
